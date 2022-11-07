@@ -1,6 +1,7 @@
 Example Voting App
 =========
 
+This is a sample change for readme branch.
 
 Getting started
 ---------------
