@@ -1,8 +1,6 @@
 Example Voting App
 =========
 
-Testng!!!!
-
 This is a sample change for readme branch.
 
 Getting started
