@@ -1,6 +1,5 @@
 pipeline {
- 
-   
+    
     agent any
 
     tools{
@@ -19,18 +18,24 @@ pipeline {
         stage('test') {
             steps {
                 echo 'Runnign units tests on worker app'
+                dir('worker'){
+                    sh 'mvn clean test'
+                }
             }
         }
         stage('package') {
             steps {
                 echo 'Packaging worker app'
+                dir('worker'){
+                    sh 'mvn package'
+                }
             }
         }
     }
     
     post {
         always{
-            echo 'worker pipeline is completed'
+            echo 'worker app pipeline is completed'
         }
     }
 }
