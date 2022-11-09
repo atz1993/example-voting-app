@@ -1,0 +1,47 @@
+version: "3.3"
+
+volumes:
+  db-data:
+
+networks:
+  instavote:
+    driver: bridge
+
+services:
+  vote:
+    image: vk93/vote:master
+    ports:
+      - 7000:80
+    depends_on:
+      - redis
+    networks:
+      - instavote
+
+  redis:
+    image: redis:alpine
+    networks:
+      - instavote
+
+  db:
+    image: postgres:10.1
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+    networks:
+      - instavote
+
+  result:
+    image: vk93/result:master
+    ports:
+      - 7001:4000
+    depends_on:
+      - db
+    networks:
+      - instavote
+
+  worker:
+    image: vk93/worker:master
+    depends_on:
+      - redis
+      - db
+    networks:
+      - instavote
