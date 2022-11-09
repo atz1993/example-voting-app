@@ -203,7 +203,6 @@ pipeline {
     stage('Deploy to dev') {
       agent any
       when {
-        changeset '**/vote/**'
         branch 'master'
       }
       steps {
